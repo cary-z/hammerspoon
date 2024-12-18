@@ -80,6 +80,10 @@ end
 -- end)
 
 hs.hotkey.bind({ "alt" }, "g", function()
+	launchOrNextWindow("Arc")
+end)
+
+hs.hotkey.bind({ "alt" }, "b", function()
 	launchOrNextWindow("Google Chrome")
 end)
 
