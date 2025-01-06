@@ -7,12 +7,12 @@ local function startKeyRepeat(newMods, newKey, mods, key)
 	end
 
 	-- 创建一个新的定时器，初始延迟后开始频繁触发按键事件
-	timers[newKey] = hs.timer.doAfter(0.3, function()
+	timers[newKey] = hs.timer.doAfter(0.2, function()
 		-- 初始延迟后，立即发送一次按键事件
 		hs.eventtap.keyStroke(mods, key, 0)
 
 		-- 开始频繁触发按键事件
-		timers[newKey] = hs.timer.doEvery(0.05, function()
+		timers[newKey] = hs.timer.doEvery(0.02, function()
 			hs.eventtap.keyStroke(mods, key, 0)
 		end)
 	end)
