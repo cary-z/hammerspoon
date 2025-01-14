@@ -80,11 +80,13 @@ end
 -- end)
 
 hs.hotkey.bind({ "alt" }, "g", function()
-	launchOrNextWindow("Arc")
+	launchOrNextWindow("Google Chrome")
+	-- launchOrNextWindow("Arc")
 end)
 
 hs.hotkey.bind({ "alt" }, "b", function()
-	launchOrNextWindow("Google Chrome")
+	-- launchOrNextWindow("Google Chrome")
+	launchOrNextWindow("Arc")
 end)
 
 hs.hotkey.bind({ "alt" }, "e", function()
@@ -96,11 +98,13 @@ hs.hotkey.bind({ "alt" }, "w", function()
 end)
 
 hs.hotkey.bind({ "alt" }, "i", function()
-	launchOrNextWindow("iTerm2")
+	-- launchOrNextWindow("iTerm2")
+	launchOrNextWindow("Ghostty")
 end)
 
 hs.hotkey.bind({ "alt" }, "q", function()
-	launchOrNextWindow("iTerm2")
+	-- launchOrNextWindow("iTerm2")
+	launchOrNextWindow("Ghostty")
 end)
 
 -- hs.hotkey.bind({ 'alt' }, 'v', function()
