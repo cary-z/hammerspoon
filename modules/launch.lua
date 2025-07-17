@@ -90,7 +90,7 @@ hs.hotkey.bind({ "alt" }, "b", function()
 end)
 
 hs.hotkey.bind({ "alt" }, "e", function()
-	launchOrNextWindow("Lark")
+	launchOrNextWindow("飞书")
 end)
 
 hs.hotkey.bind({ "alt" }, "w", function()
