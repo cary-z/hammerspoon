@@ -33,11 +33,18 @@ local function launchOrNextWindow(name)
 				if win:isMinimized() then
 					win:unminimize()
 				else
-					-- win:minimize()
+					app:hide()
 				end
 			end
 		end
 	end
+end
+
+local function isWeChatFrontmost()
+    local fw = hs.window.frontmostWindow()
+    if not fw then return false end
+    local app = fw:application()
+    return app and app:bundleID() == "com.tencent.xinWeChat"
 end
 
 -- 检查应用程序的窗口是否在前台
@@ -58,17 +65,18 @@ local function isAppFrontmostByWindows(appName)
 end
 
 -- 切换应用程序的可见性
-local function toggleAppVisibility(appName)
+local function toggleWeChatVisibility(appName)
 	local app = hs.application.get(appName)
 
 	if app then
-		if isAppFrontmostByWindows(appName) then
-			-- 如果应用程序在前台，隐藏所有窗口
-			app:hide()
-		else
-			-- 否则，启动或聚焦到应用程序
-			hs.application.launchOrFocus(appName)
-		end
+    hs.eventtap.keyStroke({ "shift", "cmd" }, "w")
+		-- if isWeChatFrontmost(appName) then
+		-- 	-- 如果应用程序在前台，隐藏所有窗口
+		-- 	app:hide()
+		-- else
+		-- 	-- 否则，启动或聚焦到应用程序
+		-- 	hs.application.launchOrFocus(appName)
+		-- end
 	else
 		-- 如果应用程序未运行，启动它
 		hs.application.launchOrFocus(appName)
@@ -94,7 +102,7 @@ hs.hotkey.bind({ "alt" }, "e", function()
 end)
 
 hs.hotkey.bind({ "alt" }, "w", function()
-	toggleAppVisibility("WeChat")
+	toggleWeChatVisibility("WeChat")
 end)
 
 hs.hotkey.bind({ "alt" }, "i", function()
