@@ -64,6 +64,16 @@ local function isAppFrontmostByWindows(appName)
 	return false
 end
 
+local function focusChromeWindowByTitle(titlePattern)
+	for _, win in ipairs(hs.window.allWindows()) do
+		if win:application():name() == "Google Chrome" and string.match(win:title(), titlePattern) then
+			win:focus()
+			return
+		end
+	end
+	hs.alert("No matching Chrome window found")
+end
+
 -- 切换应用程序的可见性
 local function toggleWeChatVisibility(appName)
 	local app = hs.application.get(appName)
@@ -101,6 +111,11 @@ hs.hotkey.bind({ "alt" }, "e", function()
 	launchOrNextWindow("飞书")
 end)
 
+hs.hotkey.bind({ "alt" }, "u", function()
+	launchOrNextWindow("Simulator")
+	focusChromeWindowByTitle("React Native DevTools")
+end)
+
 hs.hotkey.bind({ "alt" }, "w", function()
 	toggleWeChatVisibility("WeChat")
 end)
@@ -113,6 +128,10 @@ end)
 hs.hotkey.bind({ "alt" }, "q", function()
 	-- launchOrNextWindow("iTerm2")
 	launchOrNextWindow("Ghostty")
+end)
+
+hs.hotkey.bind({ "alt" }, "x", function()
+	launchOrNextWindow("Xcode")
 end)
 
 -- hs.hotkey.bind({ 'alt' }, 'v', function()
