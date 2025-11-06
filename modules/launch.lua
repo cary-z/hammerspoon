@@ -6,14 +6,12 @@ end
 local function launchOrNextWindow(name)
 	-- 获取应用程序对象
 	local app = hs.application.get(name)
-	-- hs.alert(name)
 	if not app then
 		-- 如果应用程序未运行，则启动它
 		hs.application.launchOrFocus(name)
 	else
 		local findName = name
 		local appName = hs.application.frontmostApplication():name()
-		-- hs.alert(appName)
 		if findName ~= appName then
 			-- 如果应用程序正在运行，切换到下一个窗口
 			local window = app:mainWindow()
@@ -29,22 +27,19 @@ local function launchOrNextWindow(name)
 			if wcount > 1 then
 				hs.eventtap.keyStroke({ "cmd" }, "`")
 			else
-				local win = wlist[1]
-				if win:isMinimized() then
-					win:unminimize()
-				else
-					app:hide()
-				end
+				app:hide()
 			end
 		end
 	end
 end
 
 local function isWeChatFrontmost()
-    local fw = hs.window.frontmostWindow()
-    if not fw then return false end
-    local app = fw:application()
-    return app and app:bundleID() == "com.tencent.xinWeChat"
+	local fw = hs.window.frontmostWindow()
+	if not fw then
+		return false
+	end
+	local app = fw:application()
+	return app and app:bundleID() == "com.tencent.xinWeChat"
 end
 
 -- 检查应用程序的窗口是否在前台
@@ -79,7 +74,7 @@ local function toggleWeChatVisibility(appName)
 	local app = hs.application.get(appName)
 
 	if app then
-    hs.eventtap.keyStroke({ "shift", "cmd" }, "w")
+		hs.eventtap.keyStroke({ "shift", "cmd" }, "w")
 		-- if isWeChatFrontmost(appName) then
 		-- 	-- 如果应用程序在前台，隐藏所有窗口
 		-- 	app:hide()
@@ -127,7 +122,7 @@ end)
 
 hs.hotkey.bind({ "alt" }, "q", function()
 	-- launchOrNextWindow("iTerm2")
-	launchOrNextWindow("Ghostty")
+	launchOrNextWindow("Cursor")
 end)
 
 hs.hotkey.bind({ "alt" }, "x", function()
