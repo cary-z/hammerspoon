@@ -32,25 +32,25 @@ hotkey.bind({ "cmd", "alt" }, "j", function()
 end)
 --
 -- left top quarter
-hotkey.bind({ "alt", "shift" }, "h", function()
-	window.focusedWindow():moveToUnit("[0,0,50,50]")
-end)
+-- hotkey.bind({ "alt", "shift" }, "h", function()
+-- 	window.focusedWindow():moveToUnit("[0,0,50,50]")
+-- end)
 --
 --
 -- right top quarter
-hotkey.bind({ "alt", "shift" }, "l", function()
-	window.focusedWindow():moveToUnit("[50,0,100,50]")
-end)
+-- hotkey.bind({ "alt", "shift" }, "l", function()
+-- 	window.focusedWindow():moveToUnit("[50,0,100,50]")
+-- end)
 --
 -- left bottom quarter
-hotkey.bind({ "alt", "shift" }, "k", function()
-	window.focusedWindow():moveToUnit("[0,50,50,100]")
-end)
+-- hotkey.bind({ "alt", "shift" }, "k", function()
+-- 	window.focusedWindow():moveToUnit("[0,50,50,100]")
+-- end)
 
 -- right bottom quarter
-hotkey.bind({ "alt", "shift" }, "j", function()
-	window.focusedWindow():moveToUnit("[50,50,100,100]")
-end)
+-- hotkey.bind({ "alt", "shift" }, "j", function()
+-- 	window.focusedWindow():moveToUnit("[50,50,100,100]")
+-- end)
 
 -- full screen
 hotkey.bind({ "cmd", "alt" }, "F", function()
