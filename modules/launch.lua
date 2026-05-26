@@ -108,7 +108,12 @@ end)
 
 hs.hotkey.bind({ "alt" }, "u", function()
 	launchOrNextWindow("Simulator")
-	focusChromeWindowByTitle("React Native DevTools")
+	-- focusChromeWindowByTitle("React Native DevTools")
+end)
+
+hs.hotkey.bind({ "alt" }, "o", function()
+	launchOrNextWindow("Android Studio")
+	-- focusChromeWindowByTitle("React Native DevTools")
 end)
 
 hs.hotkey.bind({ "alt" }, "w", function()
@@ -127,6 +132,10 @@ end)
 
 hs.hotkey.bind({ "alt" }, "x", function()
 	launchOrNextWindow("Xcode")
+end)
+
+hs.hotkey.bind({ "alt" }, "r", function()
+	launchOrNextWindow("iPhone镜像")
 end)
 
 -- hs.hotkey.bind({ 'alt' }, 'v', function()
