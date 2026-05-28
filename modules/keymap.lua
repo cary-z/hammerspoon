@@ -28,7 +28,7 @@ local function stopKeyRepeat(newMods, newKey, mods, key)
 end
 
 local function remapKeyWithRepeat(newMods, newKey, mods, key)
-	hs.hotkey.bind(newMods, newKey, function()
+	return hs.hotkey.bind(newMods, newKey, function()
 		startKeyRepeat(newMods, newKey, mods, key)
 	end, function()
 		stopKeyRepeat(newMods, newKey, mods, key)
@@ -36,9 +36,34 @@ local function remapKeyWithRepeat(newMods, newKey, mods, key)
 end
 
 local function remapKey(newMods, newKey, mods, key)
-	hs.hotkey.bind(newMods, newKey, function()
+	return hs.hotkey.bind(newMods, newKey, function()
 		hs.eventtap.keyStroke(mods, key, 0)
 	end)
+end
+
+local terminalApps = {
+	Alacritty = true,
+	Ghostty = true,
+	iTerm2 = true,
+	kitty = true,
+	Terminal = true,
+	WezTerm = true,
+}
+
+local function isTerminalApp()
+	local app = hs.application.frontmostApplication()
+	return app and terminalApps[app:name()] == true
+end
+
+local function isChineseInputSource()
+	local sourceID = string.lower(hs.keycodes.currentSourceID() or "")
+	return sourceID:find("chinese", 1, true)
+		or sourceID:find("pinyin", 1, true)
+		or sourceID:find("rime", 1, true)
+		or sourceID:find("scim", 1, true)
+		or sourceID:find("sogou", 1, true)
+		or sourceID:find("baidu", 1, true)
+		or sourceID:find("wetype", 1, true)
 end
 
 -- 使用 Alt + h, Alt + j, Alt + k, Alt + l 替代方向键
@@ -48,7 +73,20 @@ remapKeyWithRepeat({ "alt" }, "h", {}, "left")
 remapKeyWithRepeat({ "alt" }, "l", {}, "right")
 
 -- Ctrl+H → Backspace（兼容输入法 composition 状态）
-remapKeyWithRepeat({ "ctrl" }, "h", {}, "delete")
+local ctrlHToDelete = remapKeyWithRepeat({ "ctrl" }, "h", {}, "delete")
+
+local function updateCtrlHToDelete()
+	if isTerminalApp() and not isChineseInputSource() then
+		ctrlHToDelete:disable()
+	else
+		ctrlHToDelete:enable()
+	end
+end
+
+ctrlHAppWatcher = hs.application.watcher.new(updateCtrlHToDelete)
+ctrlHAppWatcher:start()
+hs.keycodes.inputSourceChanged(updateCtrlHToDelete)
+updateCtrlHToDelete()
 
 -- 使用 Alt + Shift + k/j/h/l 选中文字（相当于 Shift + 方向键）
 remapKeyWithRepeat({ "alt", "shift" }, "k", { "shift" }, "up")
