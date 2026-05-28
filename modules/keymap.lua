@@ -47,9 +47,8 @@ remapKeyWithRepeat({ "alt" }, "j", {}, "down")
 remapKeyWithRepeat({ "alt" }, "h", {}, "left")
 remapKeyWithRepeat({ "alt" }, "l", {}, "right")
 
--- 使用组合键位代替回车和回退
--- remapKey({ "alt" }, "o", {}, "return")
--- remapKeyWithRepeat({ "alt" }, "p", {}, "delete")
+-- Ctrl+H → Backspace（兼容输入法 composition 状态）
+remapKeyWithRepeat({ "ctrl" }, "h", {}, "delete")
 
 -- 使用 Alt + Shift + k/j/h/l 选中文字（相当于 Shift + 方向键）
 remapKeyWithRepeat({ "alt", "shift" }, "k", { "shift" }, "up")
